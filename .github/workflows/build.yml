@@ -24,13 +24,10 @@ jobs:
         pip install --upgrade pip
         pip install --user Cython==0.29.33 buildozer
 
-    - name: Build with Buildozer
-      uses: ArtemSBulgakov/buildozer-action@v1
-      id: buildozer
-      with:
-        command: buildozer -v android debug
-        build_dir: .
-        bazel_cache: false
+    - name: Build with Buildozer (Direct Native Run)
+      run: |
+        export PATH=$PATH:~/.local/bin
+        buildozer -v android debug
 
     - name: Upload APK Artifact
       uses: actions/upload-artifact@v4
